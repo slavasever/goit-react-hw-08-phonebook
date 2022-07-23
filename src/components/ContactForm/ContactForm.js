@@ -1,6 +1,7 @@
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 import { useGetContactsQuery, useAddContactMutation } from 'Redux/API';
 import { toast } from 'react-toastify';
-import s from './ContactForm.module.css';
 
 function ContactForm() {
   const { data: contacts } = useGetContactsQuery();
@@ -27,35 +28,26 @@ function ContactForm() {
   };
 
   return (
-    <form onSubmit={submitHandler} className={s.form}>
-      <label htmlFor="name" className={s.label}>
-        Name
-      </label>
-      <input
-        type="text"
-        name="name"
-        pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-        title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-        required
-        className={s.input}
-      />
+    <Form onSubmit={submitHandler}>
+      <Form.Group className="mb-3" controlId="formBasicName">
+        <Form.Label>Name</Form.Label>
+        <Form.Control
+          name="name"
+          type="name"
+          placeholder="Enter your name"
+          required
+        />
+      </Form.Group>
 
-      <label htmlFor="number" className={s.label}>
-        Number
-      </label>
-      <input
-        type="tel"
-        name="number"
-        pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-        title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-        required
-        className={s.input}
-      />
+      <Form.Group className="mb-3" controlId="formBasicPhone">
+        <Form.Label>Phone</Form.Label>
+        <Form.Control name="number" type="phone" placeholder="Phone" required />
+      </Form.Group>
 
-      <button type="submit" className={s.button}>
+      <Button variant="primary" type="submit">
         {addition ? 'Addition...' : 'Add contact'}
-      </button>
-    </form>
+      </Button>
+    </Form>
   );
 }
 

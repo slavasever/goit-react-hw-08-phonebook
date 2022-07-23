@@ -38,17 +38,3 @@ const ContactList = () => {
 };
 
 export default ContactList;
-
-// {
-//   contacts.length === 0 ? (
-//     <div>There are no contacts here yet</div>
-//   ) : (
-//     <ul>
-//       {filteredContacts.map(contact => {
-//         const { id, name, phone } = contact;
-
-//         return <ContactItem key={id} id={id} name={name} phone={phone} />;
-//       })}
-//     </ul>
-//   );
-// }

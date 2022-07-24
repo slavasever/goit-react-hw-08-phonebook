@@ -4,7 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import SharedLayout from 'components/SharedLayout';
 import Contacts from 'pages/Contacts';
 import Register from 'pages/Register';
-import Login from 'pages/Login';
+import Login from 'pages/LogIn';
 
 function App() {
   return (

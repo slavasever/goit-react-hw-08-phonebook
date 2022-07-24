@@ -1,0 +1,16 @@
+.menu{
+    display: flex;
+    align-items: center;
+    margin-left: auto !important;
+
+}
+
+.welcome{
+    font-size: 20px;
+}
+
+.name{
+    margin-right: 10px;
+    font-size: 22px;
+    font-weight: 700;
+}

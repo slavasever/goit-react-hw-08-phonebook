@@ -1,19 +1,24 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { useGetContactsQuery, useAddContactMutation } from 'Redux/API';
+// import { useGetContactsQuery, useAddContactMutation } from 'Redux/contacts';
 import { toast } from 'react-toastify';
+import { useSelector, useDispatch } from 'react-redux';
+import { getContacts } from 'Redux/contacts/contacts-selector';
+import contactsApi from 'Redux/contacts/contacts-API';
 
 function ContactForm() {
-  const { data: contacts } = useGetContactsQuery();
-  const [addContact, { isLoading: addition }] = useAddContactMutation();
+  // const { data: contacts } = useGetContactsQuery();
+  // const [addContact, { isLoading: addition }] = useAddContactMutation();
+  const dispatch = useDispatch();
+  const contacts = useSelector(getContacts);
 
   const submitHandler = event => {
     event.preventDefault();
 
     const form = event.currentTarget;
     const name = form.elements.name.value;
-    const phone = form.elements.number.value;
-    const contact = { name, phone };
+    const number = form.elements.number.value;
+    const contact = { name, number };
 
     const isContactInList =
       contacts &&
@@ -23,7 +28,7 @@ function ContactForm() {
       toast.warning(`"${contact.name}" is already in contacts!`);
       return;
     }
-    addContact(contact);
+    dispatch(contactsApi.addContact(contact));
     form.reset();
   };
 
@@ -45,7 +50,7 @@ function ContactForm() {
       </Form.Group>
 
       <Button variant="primary" type="submit">
-        {addition ? 'Addition...' : 'Add contact'}
+        Add contact
       </Button>
     </Form>
   );

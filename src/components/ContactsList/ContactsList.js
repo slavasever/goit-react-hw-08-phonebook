@@ -1,10 +1,20 @@
-import { useSelector } from 'react-redux';
-import { useGetContactsQuery } from 'Redux/API';
+import { useSelector, useDispatch } from 'react-redux';
+// import { useGetContactsQuery } from 'Redux/contacts';
+import { getContacts } from 'Redux/contacts/contacts-selector';
+import { useEffect } from 'react';
+import contactsApi from 'Redux/contacts/contacts-API';
 import ContactItem from 'components/ContactItem';
 import Loader from 'components/Loader';
 
 const ContactList = () => {
-  const { data: contacts, isFetching } = useGetContactsQuery();
+  // const { data: contacts, isFetching } = useGetContactsQuery();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(contactsApi.getContacts());
+  }, [dispatch]);
+
+  const contacts = useSelector(getContacts);
   const filter = useSelector(state => state.filter);
 
   const contactsFiltration = () => {
@@ -20,19 +30,16 @@ const ContactList = () => {
 
   return (
     <>
-      {contacts &&
-        (contacts.length === 0 ? (
-          <p className="placeholder">Add your first contact!</p>
-        ) : (
-          <ul>
-            {contactsFiltration().map(contact => {
-              const { id, name, phone } = contact;
+      {contacts && (
+        <ul>
+          {contactsFiltration().map(contact => {
+            const { id, name, number } = contact;
 
-              return <ContactItem key={id} id={id} name={name} phone={phone} />;
-            })}
-          </ul>
-        ))}
-      {isFetching && <Loader />}
+            return <ContactItem key={id} id={id} name={name} number={number} />;
+          })}
+        </ul>
+      )}
+      {/* {isFetching && <Loader />} */}
     </>
   );
 };

@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 
 const getContacts = createAsyncThunk('contacts/getContacts', async () => {
   try {
-    const { data } = await axios('/contacts');
+    const { data } = await axios('contacts');
     console.log(data);
     return data;
   } catch (error) {
@@ -17,7 +17,7 @@ const getContacts = createAsyncThunk('contacts/getContacts', async () => {
 
 const addContact = createAsyncThunk('contacts/addContact', async contact => {
   try {
-    const { data } = await axios.post('/contacts', contact);
+    const { data } = await axios.post('contacts', contact);
     return data;
   } catch (error) {
     toast.error(error.message);
@@ -28,7 +28,7 @@ const deleteContact = createAsyncThunk(
   'contacts/deleteContact',
   async contactId => {
     try {
-      const { data } = await axios.post(`/contacts/${contactId}`, contactId);
+      const { data } = await axios.delete(`contacts/${contactId}`);
       return data;
     } catch (error) {
       toast.error(error.message);

@@ -5,15 +5,14 @@ const contactsSlice = createSlice({
   name: 'contacts',
   initialState: [],
   extraReducers: {
-    [contactsApi.getContacts.fulfilled]: (state, action) => {
-      state = action.payload;
-    },
-    [contactsApi.addContact.fulfilled]: (state, action) => {
-      state = [action.payload, ...state];
-    },
-    [contactsApi.deleteContact.fulfilled]: (state, action) => {
-      state.filter(item => item.id !== action.payload);
-    },
+    [contactsApi.getContacts.fulfilled]: (_, action) => action.payload,
+
+    [contactsApi.addContact.fulfilled]: (state, action) => [
+      action.payload,
+      ...state,
+    ],
+    [contactsApi.deleteContact.fulfilled]: (state, action) =>
+      state.filter(item => item.id !== action.payload),
   },
 });
 

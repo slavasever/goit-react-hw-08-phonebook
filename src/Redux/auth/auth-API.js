@@ -42,10 +42,31 @@ const logOut = createAsyncThunk('auth/logout', async () => {
   }
 });
 
+const refreshUser = createAsyncThunk(
+  'auth/refreshUser',
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const savedToken = state.auth.token;
+
+    if (savedToken === null) {
+      return thunkAPI.rejectWithValue();
+    }
+
+    token.set(savedToken);
+    try {
+      const { data } = await axios('users/current');
+      return data;
+    } catch (error) {
+      toast.error(error.message);
+    }
+  }
+);
+
 const authApi = {
   register,
   logIn,
   logOut,
+  refreshUser,
 };
 
 export default authApi;

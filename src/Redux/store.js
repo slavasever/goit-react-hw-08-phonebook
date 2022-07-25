@@ -10,7 +10,6 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-// import items from './items/slice';
 import filter from './filter/slice';
 import auth from './auth/auth-slice';
 import contacts from './contacts/contacts-slice';

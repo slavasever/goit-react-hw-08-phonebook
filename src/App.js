@@ -12,7 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<SharedLayout />}>
           <Route path="register" element={<Register />}></Route>
-          <Route path="login" element={<LogIn />}></Route>
+          {/* <Route path="login" element={<LogIn />}></Route> */}
           <Route path="contacts" element={<Contacts />}></Route>
         </Route>
       </Routes>

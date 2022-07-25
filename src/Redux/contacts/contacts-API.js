@@ -28,7 +28,8 @@ const deleteContact = createAsyncThunk(
   'contacts/deleteContact',
   async contactId => {
     try {
-      const { data } = await axios.delete(`contacts/${contactId}`);
+      await axios.delete(`contacts/${contactId}`);
+      const { data } = await axios('contacts');
       return data;
     } catch (error) {
       toast.error(error.message);

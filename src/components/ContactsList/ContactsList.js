@@ -1,5 +1,4 @@
 import { useSelector, useDispatch } from 'react-redux';
-// import { useGetContactsQuery } from 'Redux/contacts';
 import { getContacts } from 'Redux/contacts/contacts-selector';
 import { useEffect } from 'react';
 import contactsApi from 'Redux/contacts/contacts-API';
@@ -7,7 +6,6 @@ import ContactItem from 'components/ContactItem';
 // import Loader from 'components/Loader';
 
 const ContactList = () => {
-  // const { data: contacts, isFetching } = useGetContactsQuery();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -18,7 +16,7 @@ const ContactList = () => {
   const filter = useSelector(state => state.filter);
 
   const contactsFiltration = () => {
-    const normalizedFilter = filter.toLowerCase();
+    const normalizedFilter = filter.toLowerCase().trim();
 
     return (
       contacts &&
@@ -30,15 +28,20 @@ const ContactList = () => {
 
   return (
     <>
-      {contacts && (
-        <ul>
-          {contactsFiltration().map(contact => {
-            const { id, name, number } = contact;
+      {contacts &&
+        (contactsFiltration().length !== 0 ? (
+          <ul className="pl-0">
+            {contactsFiltration().map(contact => {
+              const { id, name, number } = contact;
 
-            return <ContactItem key={id} id={id} name={name} number={number} />;
-          })}
-        </ul>
-      )}
+              return (
+                <ContactItem key={id} id={id} name={name} number={number} />
+              );
+            })}
+          </ul>
+        ) : (
+          <div>No contacts found...</div>
+        ))}
       {/* {isFetching && <Loader />} */}
     </>
   );

@@ -7,6 +7,7 @@
 .text{
     width: 400px;
     font-size: 22px;
+    color: antiquewhite;
 }
 
 .button {
@@ -20,14 +21,14 @@
     line-height: 1.87;
     letter-spacing: 0.06em;
 
-    color: white;
+    color: antiquewhite;
 
     background-color: rgb(250, 27, 27);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
     border-radius: 4px;
     border: none;
     cursor: pointer;
-    transition: transform 250ms linear;
+    transition: transform 200ms linear;
 }
 
 .button:hover {

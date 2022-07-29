@@ -1,16 +1,21 @@
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Routes, Route } from 'react-router-dom';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { useEffect, lazy } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import authApi from 'Redux/auth/auth-API';
+import { getIsRefreshingUser } from 'Redux/auth/auth-selectors';
 import SharedLayout from 'components/SharedLayout';
-import Contacts from 'pages/Contacts';
-import Register from 'pages/Register';
-// import LogIn from 'pages/LogIn';
-import TEST from 'pages/testPage';
+import PrivateRoute from 'components/PrivateRoute';
+import PublicRoute from 'components/PublicRoute';
+
+const Contacts = lazy(() => import('pages/Contacts'));
+const Register = lazy(() => import('pages/Register'));
+const LogIn = lazy(() => import('pages/LogIn'));
+// const Home = lazy(() => import('pages/Home'));
 
 function App() {
+  const isRefreshingUser = useSelector(getIsRefreshingUser);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -20,11 +25,43 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<SharedLayout />}>
-          <Route path="register" element={<Register />}></Route>
-          <Route path="login" element={<TEST />}></Route>
-          <Route path="contacts" element={<Contacts />}></Route>
-        </Route>
+        {!isRefreshingUser && (
+          <Route path="/" element={<SharedLayout />}>
+            {/* <Route
+              index
+              element={
+                <PublicRoute>
+                  <Home />
+                </PublicRoute>
+              }
+            /> */}
+            <Route
+              path="register"
+              element={
+                <PublicRoute restricted>
+                  <Register />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="login"
+              element={
+                <PublicRoute restricted>
+                  <LogIn />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="contacts"
+              element={
+                <PrivateRoute>
+                  <Contacts />
+                </PrivateRoute>
+              }
+            />
+          </Route>
+        )}
+        <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
       <ToastContainer autoClose={3000} theme={'colored'} />
     </>

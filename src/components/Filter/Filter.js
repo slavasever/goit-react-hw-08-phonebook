@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useSelector, useDispatch } from 'react-redux';
 import { setFilter } from 'Redux/filter/slice';
+import s from './Filter.module.css';
 
 const Filter = () => {
   const filter = useSelector(state => state.filter);
@@ -18,7 +19,7 @@ const Filter = () => {
   };
 
   return (
-    <div>
+    <div className={s.form}>
       <FloatingLabel
         controlId="floatingInput"
         label="Find contacts by name"

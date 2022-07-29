@@ -6,13 +6,9 @@ import Filter from 'components/Filter';
 const Contacts = () => {
   return (
     <>
-      <Section title="Phonebook">
-        <ContactForm />
-      </Section>
-      <Section title="Contacts">
-        <Filter />
-        <ContactsList />
-      </Section>
+      <ContactForm />
+      <Filter />
+      <ContactsList />
     </>
   );
 };

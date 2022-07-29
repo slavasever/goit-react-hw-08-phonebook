@@ -1,14 +1,12 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-// import { useGetContactsQuery, useAddContactMutation } from 'Redux/contacts';
 import { toast } from 'react-toastify';
 import { useSelector, useDispatch } from 'react-redux';
 import { getContacts } from 'Redux/contacts/contacts-selector';
 import contactsApi from 'Redux/contacts/contacts-API';
+import s from './ContactForm.module.css';
 
 function ContactForm() {
-  // const { data: contacts } = useGetContactsQuery();
-  // const [addContact, { isLoading: addition }] = useAddContactMutation();
   const dispatch = useDispatch();
   const contacts = useSelector(getContacts);
 
@@ -25,7 +23,7 @@ function ContactForm() {
       contacts.some(item => item.name.toLowerCase() === name.toLowerCase());
 
     if (isContactInList) {
-      toast.warning(`"${contact.name}" is already in contacts!`);
+      toast.warning(`"${name}" is already in contacts!`);
       return;
     }
     dispatch(contactsApi.addContact(contact));
@@ -33,9 +31,9 @@ function ContactForm() {
   };
 
   return (
-    <Form onSubmit={submitHandler}>
+    <Form onSubmit={submitHandler} className={s.form}>
       <Form.Group className="mb-3" controlId="formBasicName">
-        <Form.Label>Name</Form.Label>
+        <Form.Label className="text-light">Name</Form.Label>
         <Form.Control
           name="name"
           type="name"
@@ -45,13 +43,14 @@ function ContactForm() {
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPhone">
-        <Form.Label>Phone</Form.Label>
+        <Form.Label className="text-light">Phone</Form.Label>
         <Form.Control name="number" type="phone" placeholder="Phone" required />
       </Form.Group>
 
       <Button variant="primary" type="submit">
         Add contact
       </Button>
+      <hr />
     </Form>
   );
 }

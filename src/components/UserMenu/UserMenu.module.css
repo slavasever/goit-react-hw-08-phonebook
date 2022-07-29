@@ -1,12 +1,13 @@
 .menu{
     display: flex;
+    justify-content: flex-end;
     align-items: center;
-    margin-left: auto !important;
-
+padding-top: 10px;
+    color: antiquewhite
 }
 
 .welcome{
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .name{

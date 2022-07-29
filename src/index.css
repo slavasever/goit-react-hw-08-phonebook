@@ -11,8 +11,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  background-color: rgb(240, 239, 239);
+  background-image: url('./images/wallpaperbetter.com_1920x1080.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
 }
 
 code {
@@ -26,20 +29,51 @@ code {
 }
 
 .appContainer{
-  width: 1200px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
   padding-left: 15px;
   padding-right: 15px;
-  padding-top: 10px;
-
 }
 
 .navLink {
-  font-size: 20px;
-  font-weight: 700;
-  text-decoration: none;
-  margin-right: 20px;
+margin-top: 20px;
+
+font-size: 16px;
+transition: transform 200ms ease-in;
+}
+
+.navLink:hover{
+  transform: scale(1.05);
 }
 
 .active {
   color: rgb(224, 55, 55)
+}
+
+.formWrapper{
+display: flex;
+flex-direction: column;
+align-items: center;
+
+margin-right: auto;
+margin-left: auto;
+max-width: 400px;
+padding-top: 80px;
+}
+
+.input{
+  min-width: 320px;
+}
+
+.header{
+margin-bottom: 10px;
+color:antiquewhite;
+font-size: 45px;
+}
+
+.text{
+  font-size: 14px;
+  color: antiquewhite;
+  margin-bottom: 30px;
 }

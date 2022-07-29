@@ -5,6 +5,7 @@ const initialState = {
   user: { name: null, email: null },
   token: null,
   isAuthenticated: false,
+  isRefreshingUser: false,
 };
 
 const authSlice = createSlice({
@@ -26,10 +27,16 @@ const authSlice = createSlice({
       state.token = null;
       state.isAuthenticated = false;
     },
+    [authApi.refreshUser.pending]: state => {
+      state.isRefreshingUser = true;
+    },
     [authApi.refreshUser.fulfilled]: (state, action) => {
-      console.log(action.payload);
-      state.user = { ...action.payload };
+      state.user = action.payload;
       state.isAuthenticated = true;
+      state.isRefreshingUser = false;
+    },
+    [authApi.refreshUser.rejected]: state => {
+      state.isRefreshingUser = false;
     },
   },
 });

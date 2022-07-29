@@ -12,7 +12,6 @@ import PublicRoute from 'components/PublicRoute';
 const Contacts = lazy(() => import('pages/Contacts'));
 const Register = lazy(() => import('pages/Register'));
 const LogIn = lazy(() => import('pages/Auth'));
-// const Home = lazy(() => import('pages/Home'));
 
 function App() {
   const isRefreshingUser = useSelector(getIsRefreshingUser);
@@ -27,14 +26,6 @@ function App() {
       <Routes>
         {!isRefreshingUser && (
           <Route path="/" element={<SharedLayout />}>
-            {/* <Route
-              index
-              element={
-                <PublicRoute>
-                  <Home />
-                </PublicRoute>
-              }
-            /> */}
             <Route
               path="register"
               element={

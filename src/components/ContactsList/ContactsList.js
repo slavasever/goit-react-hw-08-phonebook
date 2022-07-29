@@ -3,7 +3,6 @@ import { getContacts } from 'Redux/contacts/contacts-selector';
 import { useEffect } from 'react';
 import contactsApi from 'Redux/contacts/contacts-API';
 import ContactItem from 'components/ContactItem';
-// import Loader from 'components/Loader';
 
 const ContactList = () => {
   const dispatch = useDispatch();
@@ -42,7 +41,6 @@ const ContactList = () => {
         ) : (
           <div>No contacts found...</div>
         ))}
-      {/* {isFetching && <Loader />} */}
     </>
   );
 };

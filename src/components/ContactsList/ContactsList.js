@@ -39,7 +39,7 @@ const ContactList = () => {
             })}
           </ul>
         ) : (
-          <div>No contacts found...</div>
+          <div className="text">No contacts found...</div>
         ))}
     </>
   );

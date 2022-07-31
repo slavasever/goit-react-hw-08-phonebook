@@ -18,7 +18,6 @@ const LogIn = () => {
     };
 
     dispatch(authApi.logIn(user));
-    form.reset();
   };
   return (
     <div className="formWrapper">
